@@ -9,6 +9,7 @@ AllCops:
     - "bin/**/*"
     - "pkg/**/*"
     - "doc/**/*"
+    - "vendor/**/*"
 
 Style/Documentation:
   Enabled: false
