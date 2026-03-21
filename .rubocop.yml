@@ -1,0 +1,44 @@
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.0
+  Exclude:
+    - "bin/**/*"
+    - "pkg/**/*"
+    - "doc/**/*"
+
+Style/Documentation:
+  Enabled: false
+
+# dev 依存は gemspec で管理する従来の慣例を維持する
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+# RSpec のテスト記述文字列はダブルクォートが慣例
+Style/StringLiterals:
+  Exclude:
+    - "spec/**/*"
+
+# 複数の expect は可読性のためまとめて書く場合がある
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# let の数は文脈によって増えることがある
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+# ステップの多い統合的なテストは長くなることがある（inline で disable/enable を使う）
+RSpec/ExampleLength:
+  Enabled: false
+
+# テストヘルパーメソッドの引数は多くなることがある
+Metrics/ParameterLists:
+  Exclude:
+    - "spec/**/*"
+
+# 天井ロジックなど分岐の多いメソッドは多少長くなる
+Metrics/MethodLength:
+  Max: 15

@@ -1,0 +1,6 @@
+--output-dir doc
+--markup markdown
+lib/sgmechanics.rb
+lib/sgmechanics/**/*.rb
+-
+README.md

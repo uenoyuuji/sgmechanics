@@ -1,0 +1,6 @@
+/.bundle/
+/pkg/
+/doc/
+/.yardoc/
+/.ruby-lsp/
+/Gemfile.lock
