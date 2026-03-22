@@ -8,7 +8,7 @@ RSpec.describe Sgmechanics::Stamina do
   let(:seconds_per_stamina) { 360 }
 
   def build(completion_time:, overflowed_stamina: 0)
-    described_class.new(max_stamina, seconds_per_stamina, completion_time, overflowed_stamina, now)
+    described_class.new(seconds_per_stamina, max_stamina, completion_time, overflowed_stamina, now)
   end
 
   describe "#value" do

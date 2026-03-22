@@ -21,12 +21,12 @@ module Sgmechanics
     # @return [Integer] 最大値を超えて保持しているスタミナ量
     attr_reader :overflowed_stamina
 
-    # @param max_stamina [Integer] スタミナの最大値
     # @param seconds_per_stamina [Numeric] 1 スタミナあたりの回復秒数
+    # @param max_stamina [Integer] スタミナの最大値
     # @param completion_time [Numeric] 回復完了時刻（Unix タイムスタンプ）
     # @param overflowed_stamina [Integer] 最大値を超えた分のスタミナ
     # @param now [Numeric] 現在時刻（Unix タイムスタンプ）
-    def initialize(max_stamina, seconds_per_stamina, completion_time, overflowed_stamina, now)
+    def initialize(seconds_per_stamina, max_stamina, completion_time, overflowed_stamina, now)
       @max_stamina = max_stamina
       @seconds_per_stamina = seconds_per_stamina
       @completion_time = completion_time

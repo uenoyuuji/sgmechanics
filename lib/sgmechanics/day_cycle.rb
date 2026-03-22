@@ -11,8 +11,8 @@ module Sgmechanics
   #
   # @example JST 5:00 リセット
   #   dc = Sgmechanics::DayCycle.new(reset_hour: 5, utc_offset: "+09:00")
-  #   dc.game_day(Time.new(2024, 1, 10, 4, 59, 59, "+09:00")) # => #<Date: 2024-01-09>
-  #   dc.game_day(Time.new(2024, 1, 10, 5,  0,  0, "+09:00")) # => #<Date: 2024-01-10>
+  #   dc.date_for(Time.new(2024, 1, 10, 4, 59, 59, "+09:00")) # => #<Date: 2024-01-09>
+  #   dc.date_for(Time.new(2024, 1, 10, 5,  0,  0, "+09:00")) # => #<Date: 2024-01-10>
   class DayCycle
     # @param reset_hour [Integer] リセット時刻の「時」（0〜23）
     # @param reset_minute [Integer] リセット時刻の「分」（0〜59）
@@ -26,13 +26,13 @@ module Sgmechanics
       @offset_seconds = parse_offset(utc_offset)
     end
 
-    # 指定した時刻が属するゲーム内日付（Date）を返す。
+    # 指定した時刻が属するサイクルの日付（Date）を返す。
     #
     # リセット時刻より前なら前日扱いになる。
     #
     # @param time [Time] 判定する時刻
     # @return [Date]
-    def game_day(time)
+    def date_for(time)
       local = time.getlocal(@offset_seconds)
       reset_today = reset_time_on(local.to_date, local)
       if local >= reset_today
@@ -42,11 +42,11 @@ module Sgmechanics
       end
     end
 
-    # 直近のリセット時刻を返す。
+    # 前回のリセット時刻を返す。
     #
     # @param time [Time] 基準時刻
     # @return [Time]
-    def last_reset(time)
+    def previous_reset(time)
       local = time.getlocal(@offset_seconds)
       reset_today = reset_time_on(local.to_date, local)
       if local >= reset_today
@@ -91,7 +91,7 @@ module Sgmechanics
     #     grant_daily_bonus!
     #   end
     def reset_occurred_between?(from:, to:)
-      last_reset(to) > from
+      previous_reset(to) > from
     end
 
     private
